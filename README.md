@@ -1,160 +1,144 @@
-# Employee Status Classification Using Logistic Regression - Example 1 
+# Data Science and Machine Learning Club (DSMLC) Projects
 
-# Overview
+## Overview
 
-This project serves as a practical **Machine Learning (ML) example** aligned with the **Advanced Category**
-of the **Final Competition** hosted by the **University of Calgary’s Data Science and Machine Learning Club**. 
-The dataset used in this project is similar to those provided in the competition, where participants are expected 
-to analyze real-world data, extract insights, and apply machine learning techniques.
+This repository contains **example projects** aligned with the **Advanced Category** of the **Final Competition** hosted by the **University of Calgary’s Data Science and Machine Learning Club**. These examples showcase **Machine Learning (ML) approaches** and **data-driven insights** using real-world datasets.
 
-In this example, we predict **employee status (Active or Terminated)** using **Logistic Regression**, demonstrating
-how machine learning can be used for **classification tasks**. The dataset contains employee records, including 
-**hire date** and **target ratio**, which are key factors in determining employment status.
+Each project follows a **structured pipeline**:
+1. **Data Preprocessing** – Cleaning and handling missing values.
+2. **Feature Engineering** – Creating meaningful features for ML models.
+3. **Model Training** – Applying Logistic and Linear Regression.
+4. **Model Evaluation** – Assessing performance using relevant metrics.
+5. **Data Visualization** – Communicating insights effectively.
 
-## This example showcases:
+These projects **serve as examples**, and competitors are encouraged to **explore other ML models, feature engineering techniques, and visualization tools**.
 
-- **Data preprocessing:** Handling datetime conversions and filtering based on conditions.
-- **Feature engineering:** Creating a `status` column based on hire date and target ratio.
-- **Machine learning pipeline:** Training a classification model to predict employee status.
-- **Performance evaluation:** Using precision, recall, and F1-score to assess model performance.
-- **Data visualization:** Presenting the model's performance metrics using a bar chart.
+---
 
-This project aligns with the **Machine Learning Approach category** of the competition, where participants are 
-expected to **clean and preprocess data, select appropriate ML algorithms, evaluate model performance, 
-and derive insights**. It serves as an example of how competitors can structure their projects, apply 
-statistical methods, and visualize results to communicate findings effectively.
+## Table of Contents
+- [Project Structure](#project-structure)
+- [Example 1: Employee Status Classification (Logistic Regression)](#example-1-employee-status-classification-logistic-regression)
+- [Example 2: Employee Revenue Prediction (Linear Regression)](#example-2-employee-revenue-prediction-linear-regression)
+- [How to Run the Code](#how-to-run-the-code)
+- [Dataset Details](#dataset-details)
+- [Future Improvements](#future-improvements)
 
-## Dataset
+---
 
-The dataset is stored in an Excel file (`employees_cleaned.xlsx`) and contains employee records, including:
+## Project Structure
 
-- **hire_date**: The date the employee was hired.
-- **target_ratio**: A numerical value used to determine the employee’s activity.
-- **status**: A generated column that labels employees as **"Active"** or **"Terminated"** based on conditions.
-
-## Workflow
-
-### Step 1: Load and Process the Data
-
-- The dataset is loaded using **Pandas**.
-- The `hire_date` column is converted to **datetime** format.
-- A **new column** (`status`) is created based on:
-  - If the employee was hired **more than 5 years ago**, they are labeled as `"Terminated"`.
-  - If their **target ratio is 0**, they are also labeled as `"Terminated"`.
-  - Otherwise, they are labeled as `"Active"`.
-
-```python
-import pandas as pd
-
-# Load dataset
-file_path = "employees_cleaned.xlsx"  # Replace with the actual file path
-employees = pd.read_excel(file_path)
-
-# Convert hire_date to datetime format
-employees['hire_date'] = pd.to_datetime(employees['hire_date'])
-
-# Define current year
-current_year = pd.Timestamp.now().year
-
-# Create 'status' column
-employees['status'] = employees.apply(
-    lambda row: 'Terminated' if row['hire_date'].year < (current_year - 5) or row['target_ratio'] == 0 else 'Active',
-    axis=1
-)
+```
+DSMLC_Projects-main/
+│── Example_1_Regression.md      # Documentation for Example 1
+│── Example_2_Linear_Reg.md      # Documentation for Example 2
+│── README.md                    # Main documentation (this file)
+│── Files/
+│   ├── Code/
+│   │   ├── Example1.py          # Python script for Example 1 (Logistic Regression)
+│   │   ├── Example2.py          # Python script for Example 2 (Linear Regression)
+│   ├── Data/
+│   │   ├── employees_cleaned.xlsx  # Employee data
+│   │   ├── billing_cleaned.xlsx    # Billing data
+│   ├── Screenshots/               # Images for visualizations
 ```
 
-### Step 2: Define Features and Target Variable
+---
 
-- The **only feature used** is `target_ratio`, but this can be modified for further analysis.
-- The **target variable (y)** is binary:
-  - "Terminated" → 1
-  - "Active" → 0
+## Example 1: Employee Status Classification (Logistic Regression)
 
-```python
-# Define feature (X) and target (y)
-X = employees[['target_ratio']]
-y = employees['status'].apply(lambda x: 1 if x == 'Terminated' else 0)
+This project **predicts employee status (Active or Terminated)** using **Logistic Regression**.
+
+### Workflow
+1. **Preprocessing:**
+   - Convert `hire_date` to datetime.
+   - Create `status` column based on `hire_date` and `target_ratio`.
+2. **Feature Engineering:** 
+   - Use `target_ratio` as the predictor variable.
+3. **Model Training:**
+   - Train a **Logistic Regression model** on the dataset.
+4. **Evaluation:**
+   - Assess model performance using **precision, recall, and F1-score**.
+5. **Visualization:**
+   - Create bar charts to compare model performance metrics.
+
+📄 **See full details in [Example_1_Regression.md](Example_1_Regression.md)**.
+
+---
+
+## Example 2: Employee Revenue Prediction (Linear Regression)
+
+This project **predicts total revenue generated by employees** using **Linear Regression**.
+
+### Workflow
+1. **Preprocessing:**
+   - Merge employee hourly rates with billing records.
+   - Handle missing values.
+2. **Feature Engineering:** 
+   - Create `revenue = hours_worked × hourly_rate`.
+3. **Model Training:**
+   - Train a **Linear Regression model**.
+4. **Evaluation:**
+   - Use **Mean Squared Error (MSE)** and **R² score** to assess performance.
+5. **Visualization:**
+   - Scatter plot of actual vs. predicted revenue.
+
+📄 **See full details in [Example_2_Linear_Reg.md](Example_2_Linear_Reg.md)**.
+
+---
+
+## How to Run the Code
+
+### Prerequisites
+```bash
+pip install pandas scikit-learn matplotlib numpy openpyxl
 ```
 
-### Step 3: Train and Test the Model
+### Steps to Run
+```bash
+cd Files/Code
 
-- The data is split into **training (70%)** and **testing (30%)** sets.
-- A **Logistic Regression model** is trained on the training data.
+# Run Example 1
+python Example1.py
 
-```python
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-
-# Split dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-
-# Train Logistic Regression model
-model = LogisticRegression()
-model.fit(X_train, y_train)
+# Run Example 2
+python Example2.py
 ```
 
-### Step 4: Predict and Evaluate Model Performance
+---
 
-- The model makes predictions on the test data.
-- A **classification report** is generated, displaying:
-  - **Precision**
-  - **Recall**
-  - **F1-Score**
+## Dataset Details
 
-```python
-from sklearn.metrics import classification_report
+The dataset consists of two key files:
 
-# Make predictions
-y_pred = model.predict(X_test)
+### 1. `employees_cleaned.xlsx`
+- **employee_id**: Unique identifier for each employee.
+- **hire_date**: Date when the employee was hired.
+- **target_ratio**: The percentage of time an employee is expected to spend on billable work.
+- **rate**: Hourly rate of the employee.
+- **status**: Employee status (Active or Terminated).
 
-# Print classification report
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred))
-```
+### 2. `billing_cleaned.xlsx`
+- **employee_id**: Foreign key linking to employees.
+- **hours**: Number of hours worked.
+- **revenue**: Total revenue generated (`hours worked × hourly rate`).
 
-### Step 5: Visualize Model Performance
+---
 
-A **bar chart** is created using Matplotlib to compare the precision, recall, and F1-score for each class (Active vs. Terminated).
+## Future Improvements
+- **Expand Feature Engineering**: Add new variables such as department, years_of_experience, etc.
+- **Test Different Models**: Experiment with Decision Trees, Random Forests, or Neural Networks.
+- **Hyperparameter Tuning**: Optimize model performance using GridSearchCV.
+- **Interactive Dashboards**: Use Tableau or Power BI to enhance data storytelling.
+- **Graph Database Implementation**: Try Neo4j for relationship-based insights.
 
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-# Define classification metrics manually (example values)
-metrics = {
-    "Active (0)": {"precision": 0.53, "recall": 0.31, "f1-score": 0.39},
-    "Terminated (1)": {"precision": 0.80, "recall": 0.91, "f1-score": 0.85}
-}
-
-# Data preparation for plotting
-categories = list(metrics.keys())
-precision = [metrics[cat]['precision'] for cat in categories]
-recall = [metrics[cat]['recall'] for cat in categories]
-f1_score = [metrics[cat]['f1-score'] for cat in categories]
-
-x = np.arange(len(categories))  # Label locations
-width = 0.25  # Bar width
-
-# Create the bar chart
-fig, ax = plt.subplots(figsize=(8, 5))
-ax.bar(x - width, precision, width, label='Precision')
-ax.bar(x, recall, width, label='Recall')
-ax.bar(x + width, f1_score, width, label='F1-Score')
-
-# Add labels and title
-ax.set_xlabel('Class')
-ax.set_ylabel('Scores')
-ax.set_title('Model Performance by Class')
-ax.set_xticks(x)
-ax.set_xticklabels(categories)
-ax.legend()
-
-# Show the plot
-plt.tight_layout()
-plt.show()
-```
+---
 
 ## Conclusion
 
-This project demonstrates a simple yet effective approach to predicting employee status using **logistic regression**. The model provides insights into employee attrition trends based on the **target ratio** and can be further improved by incorporating additional features.
+This repository serves as a resource for participants in the **Final Competition’s Machine Learning Approach** category. 
+It provides structured examples of **Logistic Regression (classification)** and **Linear Regression (prediction)** applied to real-world HR and financial datasets.
 
+📢 **Contributions & Enhancements:**
+Participants are encouraged to modify, extend, and improve these models to develop unique insights and competitive solutions for the Final Competition.
+
+🚀 **Start exploring and get ready for the competition!** 🚀
