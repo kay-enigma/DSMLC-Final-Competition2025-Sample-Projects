@@ -5,8 +5,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
 # File paths to the datasets
-billing_path = "billing_cleaned.xlsx"  # Replace with the correct file path
-employees_path = "employees_cleaned.xlsx"  # Replace with the correct file path
+billing_path = "Files/Data/billing_cleaned.xlsx"  # Replace with the correct file path
+employees_path = "Files/Data/employees_cleaned.xlsx"  # Replace with the correct file path
 
 # Step 1: Load the datasets
 billing = pd.read_excel(billing_path)

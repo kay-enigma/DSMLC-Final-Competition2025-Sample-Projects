@@ -4,7 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
 # File path to the dataset
-file_path = "employees_cleaned.xlsx"  # Replace with the correct file path
+file_path = "Files/Data/employees_cleaned.xlsx"  # Replace with the correct file path
 
 # Step 1: Load the dataset
 employees = pd.read_excel(file_path)
