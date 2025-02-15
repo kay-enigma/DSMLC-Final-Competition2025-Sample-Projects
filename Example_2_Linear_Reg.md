@@ -1,16 +1,22 @@
 # Employee Revenue Prediction Using Linear Regression
 
-## Overview
+# Overview
 
-This project applies **Linear Regression** to predict employee revenue based on their **hourly rate** and **hours worked**. The dataset includes billing and employee records, and the model is trained to estimate total revenue.
+This project applies **Linear Regression** to predict employee revenue based on their **hourly rate** 
+and **hours worked**. The dataset includes billing and employee records, and the model is trained 
+to estimate total revenue.
 
-This example showcases:
+## This example showcases:
 
 - **Data preprocessing:** Merging employee rate data with billing records and handling missing values.
 - **Feature engineering:** Calculating revenue as a product of hours worked and employee rate.
 - **Machine learning pipeline:** Training a regression model to predict revenue.
 - **Performance evaluation:** Using Mean Squared Error (MSE) and R-squared (R²) to assess model accuracy.
 - **Data visualization:** Plotting actual vs. predicted revenue for comparison.
+
+This example demonstrates how **Linear Regression** can be used in the **Final Competition’s Machine Learning 
+category**, where participants are encouraged to apply ML techniques for data-driven insights. It illustrates 
+the importance of **feature selection, data cleaning, and model evaluation** in real-world datasets.
 
 ## Dataset
 
